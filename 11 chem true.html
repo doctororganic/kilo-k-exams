@@ -1,0 +1,1884 @@
+11 chem true.html
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحانات الكيمياء - الصف الحادي عشر - الفصل الدراسي الأول</title>
+    <style>
+        :root {
+            --primary-color: #1a3a9b;
+            --secondary-color: #0c4a6e;
+            --success-color: #16a34a;
+            --danger-color: #dc2626;
+            --warning-color: #f59e0b;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1e3a8a, #0c4a6e);
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .exam-config {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+        }
+        
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .config-item {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        select:focus, input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.2);
+        }
+        
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .exam-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            display: none;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .question:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .question-number {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .options {
+            margin-right: 20px;
+        }
+        
+        .option {
+            margin-bottom: 10px;
+            position: relative;
+            padding-right: 30px;
+        }
+        
+        .option input {
+            margin-left: 10px;
+            width: auto;
+        }
+        
+        .correct-answer {
+            display: none;
+            margin-top: 15px;
+            padding: 12px 15px;
+            background-color: #dbeafe;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .show-answers {
+            background-color: var(--secondary-color);
+        }
+        
+        .show-answers:hover {
+            background-color: #0b5e74;
+        }
+        
+        .exam-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .exam-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .exam-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .exam-details {
+            text-align: left;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #15803d;
+        }
+        
+        .timer {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--danger-color);
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .topic-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .topic-tag {
+            background-color: #dbeafe;
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .topic-tag.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .difficulty {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .easy {
+            background-color: #dcfce7;
+            color: var(--success-color);
+        }
+        
+        .medium {
+            background-color: #ffedd5;
+            color: var(--warning-color);
+        }
+        
+        .hard {
+            background-color: #fee2e2;
+            color: var(--danger-color);
+        }
+        
+        .instructions {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .instructions h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        
+        .instructions ol {
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #64748b;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .exam-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>امتحانات الكيمياء</h1>
+            <div class="subtitle">الصف الحادي عشر - الفصل الدراسي الأول - وزارة التربية الكويتية</div>
+        </header>
+        
+        <div class="instructions">
+            <h3>تعليمات الاستخدام</h3>
+            <p>اختر الموضوع واختر عدد الأسئلة (15 سؤالاً) وفق مواصفات وزارة التربية الكويتية:</p>
+            <ol>
+                <li>اختر الموضوع الذي تريد الامتحان فيه</li>
+                <li>اضغط على "بدء امتحان" لتوليد الامتحان</li>
+                <li>وقت الامتحان: نصف ساعة</li>
+                <li>يمكنك عرض الإجابات الصحيحة بالنقر على "عرض الإجابات"</li>
+                <li>عند الانتهاء، انقر على "تقديم الامتحان" لمعرفة نتيجتك</li>
+            </ol>
+        </div>
+        
+        <div class="exam-config">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">إعدادات الامتحان</h2>
+            
+            <div class="config-item">
+                <label>اختر الموضوع</label>
+                <div class="topic-tags">
+                    <span class="topic-tag active" data-topic="unit1">الروابط الكيميائية</span>
+                    <span class="topic-tag" data-topic="unit2">الهندسة الجزيئية</span>
+                    <span class="topic-tag" data-topic="unit3">خصائص المركبات</span>
+                    <span class="topic-tag" data-topic="unit4">الطاقة في التفاعلات</span>
+                    <span class="topic-tag" data-topic="unit5">الحلول والتركيزات</span>
+                    <span class="topic-tag" data-topic="unit6">الامتحان الشامل - الجزء 1</span>
+                    <span class="topic-tag" data-topic="unit7">الامتحان الشامل - الجزء 2</span>
+                </div>
+            </div>
+            
+            <button id="generate-exam" class="btn btn-block">بدء امتحان</button>
+        </div>
+        
+        <div class="exam-container" id="exam-container">
+            <div class="exam-header">
+                <div class="exam-title" id="exam-title">امتحان دوري في مادة الكيمياء</div>
+                <div class="exam-info">
+                    <div class="exam-details">
+                        <p><strong>الصف:</strong> الحادي عشر</p>
+                        <p><strong>الفصل الدراسي:</strong> الأول</p>
+                        <p><strong>المدة الزمنية:</strong> نصف ساعة</p>
+                    </div>
+                    <div class="exam-details">
+                        <p><strong>السنة الدراسية:</strong> 2024-2025</p>
+                        <p><strong>القسم:</strong> العلمي</p>
+                        <p><strong>عدد الأسئلة:</strong> 15</p>
+                    </div>
+                </div>
+                
+                <div class="timer" id="timer">30:00</div>
+            </div>
+            
+            <div id="questions-container">
+                <!-- الأسئلة ستظهر هنا ديناميكيًا -->
+            </div>
+            
+            <div class="actions">
+                <button class="btn show-answers" id="show-answers">عرض الإجابات</button>
+                <button class="btn btn-success" id="submit-exam">تقديم الامتحان</button>
+                <button class="btn" id="new-exam">امتحان جديد</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>امتحانات الكيمياء - وفق منهج وزارة التربية الكويتية - الفصل الدراسي الأول 2024-2025</p>
+            <p>تم التطوير بناءً على المواصفات الرسمية للامتحانات الوزارية</p>
+        </div>
+    </div>
+
+    <script>
+        // قاعدة البيانات الأساسية للأسئلة (15 سؤالاً لكل مجموعة)
+        const questionBank = {
+            // المجموعة الأولى: الروابط الكيميائية
+            unit1: [
+                {
+                    id: 1,
+                    question: "تتكون الرابطة الأيونية نتيجة:",
+                    options: [
+                        "مشاركة إلكترونات بين الذرات",
+                        "التجاذب بين الأيونات المخالفة الشحنة",
+                        "التنافر بين الإلكترونات في الذرات",
+                        "تداخل المدارات الذرية"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الرابطة الأيونية تنشأ نتيجة التجاذب الكهربائي بين الأيونات الموجبة والسالبة الناتجة عن فقدان واكتساب الإلكترونات."
+                },
+                {
+                    id: 2,
+                    question: "في جزيء الماء (H₂O)، تكون الزاوية بين الروابط:",
+                    options: [
+                        "180°",
+                        "120°",
+                        "109.5°",
+                        "104.5°"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "الزاوية في جزيء الماء تساوي 104.5° بسبب التنافر بين أزواج الإلكترونات غير الرابطة على ذرة الأكسجين."
+                },
+                {
+                    id: 3,
+                    question: "عدد الروابط سيغما (σ) في جزيء الإيثاين (H-C≡C-H) يساوي:",
+                    options: [
+                        "2",
+                        "3",
+                        "4",
+                        "5"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "في جزيء الإيثاين (H-C≡C-H) يوجد ثلاث روابط سيغما: واحدة بين كل ذرة هيدروجين وكربون، ورابطة سيغما واحدة بين ذرتي الكربون، بالإضافة إلى رابطتي باي (π) بين ذرتي الكربون."
+                },
+                {
+                    id: 4,
+                    question: "الرابطة في جزيء الهيدروجين (H₂) هي رابطة:",
+                    options: [
+                        "أيونية",
+                        "سيغما (σ)",
+                        "باي (π)",
+                        "سيغما وباي"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "رابطة الهيدروجين هي رابطة سيغما (σ) ناتجة عن التداخل المباشر بين مداري 1s للذرتين."
+                },
+                {
+                    id: 5,
+                    question: "عدد الإلكترونات غير المزاوجة في جزيء الأكسجين (O₂) حسب نظرية المدارات الجزيئية هو:",
+                    options: [
+                        "0",
+                        "1",
+                        "2",
+                        "3"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "الجزيء يحتوي على إلكترونين غير مزاوجين في مدارتي antibonding نصف ممتلئتين، مما يفسر الخواص المغناطيسية للأكسجين."
+                },
+                {
+                    id: 6,
+                    question: "أي من الجزيئات التالية يحتوي على روابط من نوع باي (π)؟",
+                    options: [
+                        "H₂",
+                        "N₂",
+                        "F₂",
+                        "Cl₂"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "جزيء النيتروجين (N₂) يحتوي على رابطة ثلاثية تتكون من رابطة سيغما واحدة ورابطتي باي، بينما الجزيئات الأخرى تحتوي على روابط أحادية سيغما فقط."
+                },
+                {
+                    id: 7,
+                    question: "عدد الروابط في جزيء CO هو:",
+                    options: [
+                        "رابطة أحادية",
+                        "رابطة ثنائية",
+                        "رابطة ثلاثية",
+                        "رابطة رباعية"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "جزيء أول أكسيد الكربون يحتوي على رابطة ثلاثية تتكون من رابطة سيغما واحدة ورابطتي باي، مع وجود إلكترونات غير مشاركة على ذرتي الكربون والأكسجين."
+                },
+                {
+                    id: 8,
+                    question: "الرابطة في جزيء النيتروجين (N₂) هي رابطة:",
+                    options: [
+                        "أيونية",
+                        "سيغما واحدة",
+                        "سيغما واحدة وباي اثنتان",
+                        "باي ثلاث"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "جزيء النيتروجين يحتوي على رابطة ثلاثية تتمثل في رابطة سيغما واحدة ورابطتي باي، مما يعطي قوة ربط عالية بين ذرتي النيتروجين."
+                },
+                {
+                    id: 9,
+                    question: "الشكل الهندسي لجزيء BF₃ هو:",
+                    options: [
+                        "خطي",
+                        "مستوي مثلثي",
+                        "هرمي مثلثي",
+                        "رباعي السطوح"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "جزيء BF₃ يتخذ الشكل المستوي المثلثي بسبب وجود ثلاث روابط تساهمية حول ذرة البورون المركزية دون وجود أزواج إلكترونية حرة."
+                },
+                {
+                    id: 10,
+                    question: "تتكون الرابطة التساهمية نتيجة:",
+                    options: [
+                        "التجاذب بين الأيونات",
+                        "تداخل المدارات الذرية",
+                        "التنافر بين الإلكترونات",
+                        "التجاذب بين الأنوية والإلكترونات"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الرابطة التساهمية تنشأ نتيجة تداخل المدارات الذرية للذرات المشاركة في الرابطة."
+                },
+                {
+                    id: 11,
+                    question: "نوع الرابطة في جزيء HF هو:",
+                    options: [
+                        "أيونية",
+                        "تساهمية نقية",
+                        "تساهمية قطبية",
+                        "فلزية"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "الرابطة في جزيء HF هي تساهمية قطبية بسبب عدم تكافؤ الذرتين في قوة جذب الإلكترونات المشتركة."
+                },
+                {
+                    id: 12,
+                    question: "زاوية الروابط في جزيء الميثان (CH₄) تساوي:",
+                    options: [
+                        "180°",
+                        "120°",
+                        "109.5°",
+                        "90°"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "زاوية الروابط في جزيء الميثان تساوي 109.5° بسبب التهجين sp³ للذرة المركزية."
+                },
+                {
+                    id: 13,
+                    question: "عدد الروابط باي (π) في جزيء CO₂ هو:",
+                    options: [
+                        "0",
+                        "1",
+                        "2",
+                        "3"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "في جزيء CO₂ يوجد رابطتان باي (π) واحدة في كل اتجاه بين ذرة الكربون والأكسجين."
+                },
+                {
+                    id: 14,
+                    question: "نوع الرابطة بين الذرات في جزيء F₂ هو:",
+                    options: [
+                        "أيونية",
+                        "تساهمية نقية",
+                        "تساهمية قطبية",
+                        "فلزية"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الرابطة بين ذرتي الفلور في جزيء F₂ هي تساهمية نقية لأن الذرتين متماثلتان في قوة الجذب."
+                },
+                {
+                    id: 15,
+                    question: "عدد أزواج الإلكترونات غير الرابطة على ذرة الأكسجين في جزيء الماء (H₂O) هو:",
+                    options: [
+                        "0",
+                        "1",
+                        "2",
+                        "3"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "تحتوي ذرة الأكسجين في جزيء الماء على زوجين من الإلكترونات غير الرابطة."
+                }
+            ],
+            
+            // المجموعة الثانية: الهندسة الجزيئية
+            unit2: [
+                {
+                    id: 16,
+                    question: "الشكل الهندسي لجزيء الميثان (CH₄) هو:",
+                    options: [
+                        "خطي",
+                        "ثماني الوجوه",
+                        "هرمي مثلثي",
+                        "رباعي السطوح"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "جزيء الميثان يتخذ الشكل الرباعي السطوح بسبب وجود أربع روابط تساهمية حول ذرة الكربون المركزية دون وجود أزواج إلكترونية حرة."
+                },
+                {
+                    id: 17,
+                    question: "إذا كانت عدد المدارات المهجنة في ذرة ما هو 3، فإن الشكل الهندسي المتوقع هو:",
+                    options: [
+                        "خطي",
+                        "ثماني الوجوه",
+                        "مستوي مثلثي",
+                        "رباعي السطوح"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "التهجين sp² ينتج عنه ثلاثة مدارات مهجنة موجهة في مستوى واحد بزوايا 120°، مما ينتج عنه شكلًا هندسيًا مستويًا مثلثيًا."
+                },
+                {
+                    id: 18,
+                    question: "الزاوية بين الروابط في جزيء ثاني أكسيد الكبريت (SO₂) أقل من 120° بسبب:",
+                    options: [
+                        "وجود زوج إلكتروني حر على ذرة الكبريت",
+                        "الشحنة الموجبة على ذرة الكبريت",
+                        "الشحنة السالبة على ذرات الأكسجين",
+                        "وجود روابط باي بين الكبريت والأكسجين"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "الجزيء يحتوي على زوج إلكتروني حر على ذرة الكبريت، مما يسبب تنافرًا إضافيًا ويقلل الزاوية بين الروابط عن القيمة المثالية 120°."
+                },
+                {
+                    id: 19,
+                    question: "عدد المدارات المهجنة في ذرة الكربون في جزيء الإيثيلين (H₂C=CH₂) هو:",
+                    options: [
+                        "2",
+                        "3",
+                        "4",
+                        "6"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "في جزيء الإيثيلين، تستخدم ذرة الكربون ثلاثة مدارات مهجنة من نوع sp² لتشكيل الروابط سيغما مع ذرتين هيدروجين وذرة كربون أخرى."
+                },
+                {
+                    id: 20,
+                    question: "الزاوية بين الروابط في جزيء الأمونيا (NH₃) تساوي:",
+                    options: [
+                        "180°",
+                        "120°",
+                        "109.5°",
+                        "107°"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "الزاوية في جزيء الأمونيا تساوي 107° بسبب التنافر بين زوج الإلكترونات غير الرابطة على ذرة النيتروجين والأزواج الرابطة."
+                },
+                {
+                    id: 21,
+                    question: "الشكل الهندسي لجزيء CO₂ هو:",
+                    options: [
+                        "خطي",
+                        "مستوي مثلثي",
+                        "رباعي السطوح",
+                        "منحني"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "جزيء ثاني أكسيد الكربون له شكل خطي بسبب تهجين sp للذرة المركزية وعدم وجود أزواج إلكترونية حرة."
+                },
+                {
+                    id: 22,
+                    question: "نوع التهجين في ذرة الكبريت في جزيء SO₃ هو:",
+                    options: [
+                        "sp",
+                        "sp²",
+                        "sp³",
+                        "dsp³"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "في جزيء SO₃ تتكون ذرة الكبريت من ثلاثة مدارات مهجنة من نوع sp²، مما ينتج عنه شكل مستوي مثلثي."
+                },
+                {
+                    id: 23,
+                    question: "الشكل الهندسي لجزيء BF₃ هو:",
+                    options: [
+                        "خطي",
+                        "مستوي مثلثي",
+                        "هرمي مثلثي",
+                        "رباعي السطوح"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الجزيء BF₃ له شكل مستوي مثلثي بسبب وجود ثلاث روابط حول الذرة المركزية وعدم وجود أزواج إلكترونية حرة."
+                },
+                {
+                    id: 24,
+                    question: "عدد أزواج الإلكترونات الرابطة في جزيء H₂O هو:",
+                    options: [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "يحتوي جزيء الماء على زوجين من الإلكترونات الرابطة بين ذرة الأكسجين وذرتي الهيدروجين."
+                },
+                {
+                    id: 25,
+                    question: "الشكل الهندسي لجزيء SO₃ هو:",
+                    options: [
+                        "خطي",
+                        "مستوي مثلثي",
+                        "رباعي السطوح",
+                        "هرمي مثلثي"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الجزيء SO₃ له شكل مستوي مثلثي بسبب وجود ثلاث روابط حول الذرة المركزية وعدم وجود أزواج إلكترونية حرة."
+                },
+                {
+                    id: 26,
+                    question: "في جزيء H₂O، التنافر بين أزواج الإلكترونات غير الرابطة هو:",
+                    options: [
+                        "أقل من التنافر بين الأزواج الرابطة",
+                        "يساوي التنافر بين الأزواج الرابطة",
+                        "أكبر من التنافر بين الأزواج الرابطة",
+                        "غير مؤثر على الشكل الهندسي"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "في جزيء الماء، التنافر بين أزواج الإلكترونات غير الرابطة أكبر من التنافر بين الأزواج الرابطة، مما يقلل الزاوية بين الروابط."
+                },
+                {
+                    id: 27,
+                    question: "الزاوية بين الروابط في جزيء BF₃ تساوي:",
+                    options: [
+                        "90°",
+                        "109.5°",
+                        "120°",
+                        "180°"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "الزاوية في جزيء BF₃ تساوي 120° بسبب الشكل المستوي المثلثي."
+                },
+                {
+                    id: 28,
+                    question: "يحتوي جزيء CH₄ على زوج إلكتروني حر:",
+                    options: [
+                        "نعم",
+                        "لا",
+                        "زوجان",
+                        "ثلاثة أزواج"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "جزيء الميثان لا يحتوي على أي أزواج إلكترونية حرة على الذرة المركزية، حيث تشكل جميع الإلكترونات روابط."
+                },
+                {
+                    id: 29,
+                    question: "نوع التهجين في ذرة النيتروجين في جزيء NH₃ هو:",
+                    options: [
+                        "sp",
+                        "sp²",
+                        "sp³",
+                        "dsp²"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "في جزيء الأمونيا NH₃، تكون ذرة النيتروجين مهجنة من النوع sp³ مع وجود زوج إلكتروني حر."
+                },
+                {
+                    id: 30,
+                    question: "الجزيء الذي يحتوي على زوج إلكتروني حر هو:",
+                    options: [
+                        "CO₂",
+                        "BF₃",
+                        "NH₃",
+                        "CH₄"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "جزيء الأمونيا NH₃ يحتوي على زوج إلكتروني حر على ذرة النيتروجين، بينما الجزيئات الأخرى لا تحتوي على أزواج حرة."
+                }
+            ],
+            
+            // المجموعة الثالثة: خصائص المركبات
+            unit3: [
+                {
+                    id: 31,
+                    question: "من بين المركبات التالية، المركب الذي يذوب في الماء بسهولة هو:",
+                    options: [
+                        "CH₄",
+                        "C₂H₆",
+                        "C₆H₆",
+                        "NH₃"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "الأمونيا (NH₃) يذوب في الماء بسهولة بسبب تكوين روابط هيدروجينية مع جزيئات الماء، بينما المركبات الأخرى هيدروكربونات غير قطبية."
+                },
+                {
+                    id: 32,
+                    question: "درجة غليان HF أعلى من HCl بسبب:",
+                    options: [
+                        "الكتلة الجزيئية الأكبر لـ HF",
+                        "وجود روابط هيدروجينية في HF",
+                        "القطبية الأعلى لـ HCl",
+                        "قوة الرابطة التساهمية في HF"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الهيدروفلوريد (HF) يحتوي على روابط هيدروجينية قوية بين الجزيئات، مما يرفع درجة غليانه مقارنة بـ HCl الذي لا يحتوي على روابط هيدروجينية."
+                },
+                {
+                    id: 33,
+                    question: "المركب الذي يشكل شبكة بلورية أيونية هو:",
+                    options: [
+                        "CO₂",
+                        "H₂O",
+                        "NaCl",
+                        "CH₄"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "كلوريد الصوديوم (NaCl) يشكل شبكة بلورية أيونية منتظمة بسبب الروابط الأيونية القوية بين أيونات الصوديوم والكلوريد."
+                },
+                {
+                    id: 34,
+                    question: "أي من المركبات التالية يتميز بدرجة انصهار مرتفعة بسبب الروابط الهيدروجينية؟",
+                    options: [
+                        "CH₄",
+                        "H₂O",
+                        "NH₃",
+                        "HF"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الماء (H₂O) يتميز بدرجة انصهار مرتفعة نسبياً بسبب وجود روابط هيدروجينية قوية بين جزيئاته، مما يتطلب طاقة أكبر لكسر هذه الروابط."
+                },
+                {
+                    id: 35,
+                    question: "المادة التي تكون صلبة في الظروف العادية من بين المواد التالية هي:",
+                    options: [
+                        "CO₂",
+                        "O₂",
+                        "NaCl",
+                        "HCl"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "كلوريد الصوديوم (NaCl) مادة صلبة في الظروف العادية بسبب قوة الروابط الأيونية بين الأيونات في الشبكة البلورية، بينما المركبات الأخرى غازات."
+                },
+                {
+                    id: 36,
+                    question: "الجزيء الذي يحتوي على أكبر عدد من الروابط الهيدروجينية هو:",
+                    options: [
+                        "NH₃",
+                        "H₂O",
+                        "HF",
+                        "CH₄"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "جزيء الماء (H₂O) يمكن أن يشكل أربع روابط هيدروجينية (ذرتا هيدروجين وذرة أكسجين)، بينما الأمونيا تشكل ثلاثة والهيدروفلوريد تشكل اثنين."
+                },
+                {
+                    id: 37,
+                    question: "المركب الذي يمتلك قطبية عالية هو:",
+                    options: [
+                        "CCl₄",
+                        "CH₄",
+                        "H₂O",
+                        "BF₃"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "الماء (H₂O) يتميز بقطبية عالية بسبب شكله المنحني وفرق الكهروسالبية الكبير بين الأكسجين والهيدروجين."
+                },
+                {
+                    id: 38,
+                    question: "المركب الذي يذوب في المذيبات غير القطبية هو:",
+                    options: [
+                        "NaCl",
+                        "KCl",
+                        "C₆H₆",
+                        "NH₃"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "البنزين (C₆H₆) مركب غير قطبي يذوب بسهولة في المذيبات غير القطبية، بينما المركبات الأخرى قطبية أو أيونية."
+                },
+                {
+                    id: 39,
+                    question: "السبب الرئيسي لانخفاض درجة غليان المركبات الهيدروكربونية هو:",
+                    options: [
+                        "الكتلة الجزيئية المنخفضة",
+                        "الروابط الهيدروجينية الضعيفة",
+                        "الروابط التساهمية القوية",
+                        "القوى بين الجزيئية الضعيفة"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "الهيدروكربونات غير قطبية وتتأثر بقوى لندن الضعيفة بين الجزيئات، مما يؤدي إلى درجات غليان منخفضة."
+                },
+                {
+                    id: 40,
+                    question: "المركب الذي يشكل روابط هيدروجينية بين جزيئاته هو:",
+                    options: [
+                        "CH₄",
+                        "NH₃",
+                        "CCl₄",
+                        "CO₂"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الأمونيا (NH₃) تشكل روابط هيدروجينية بين جزيئاتها بسبب وجود ذرة نيتروجين ذات كهروسالبية عالية وذرة هيدروجين مرتبطة بها."
+                },
+                {
+                    id: 41,
+                    question: "الجزيء الذي لا يمتلك عزم ثنائي القطب هو:",
+                    options: [
+                        "H₂O",
+                        "NH₃",
+                        "BF₃",
+                        "HF"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "الجزيء BF₃ لا يمتلك عزم ثنائي القطب بسبب تناظره العالي وشكله المستوي المثلثي، مما يجعل متجهات العزم تلغي بعضها البعض."
+                },
+                {
+                    id: 42,
+                    question: "السبب في ارتفاع درجة غليان الماء مقارنة بالمركبات الهيدروجينية الأخرى هو:",
+                    options: [
+                        "الكتلة الجزيئية العالية",
+                        "الروابط الهيدروجينية القوية",
+                        "الروابط التساهمية",
+                        "الكتلة النوعية العالية"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "ارتفاع درجة غليان الماء يعود إلى وجود روابط هيدروجينية قوية بين الجزيئات، مما يتطلب طاقة أكبر لفصلها."
+                },
+                {
+                    id: 43,
+                    question: "المركب الذي يتبلور في شكل بلوري أيوني هو:",
+                    options: [
+                        "CO₂",
+                        "SiO₂",
+                        "NaCl",
+                        "CH₄"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "كلوريد الصوديوم (NaCl) يتبلور في شكل بلوري أيوني منتظم بسبب الروابط الأيونية القوية بين أيونات الصوديوم والكلوريد."
+                },
+                {
+                    id: 44,
+                    question: "المركب الذي يذوب في الماء ولكنه لا يوصل الكهرباء هو:",
+                    options: [
+                        "NaCl",
+                        "HCl",
+                        "C₂H₅OH",
+                        "KOH"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "الكحول الإيثيلي (C₂H₅OH) يذوب في الماء بسبب الروابط الهيدروجينية ولكنه لا يفكك إلى أيونات، وبالتالي لا يوصل الكهرباء."
+                },
+                {
+                    id: 45,
+                    question: "الجزيء الذي يمتلك شكلًا منحنيًا هو:",
+                    options: [
+                        "CO₂",
+                        "BF₃",
+                        "H₂O",
+                        "CH₄"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "جزيء الماء (H₂O) يمتلك شكلًا منحنيًا بسبب وجود زوجين من الإلكترونات غير الرابطة على ذرة الأكسجين."
+                }
+            ],
+            
+            // المجموعة الرابعة: الطاقة في التفاعلات
+            unit4: [
+                {
+                    id: 46,
+                    question: "السبب في ارتفاع درجة غليان الماء مقارنة بالمركبات الهيدروجينية الأخرى هو:",
+                    options: [
+                        "الكتلة الجزيئية العالية",
+                        "الروابط الهيدروجينية القوية",
+                        "الروابط التساهمية",
+                        "الكتلة النوعية العالية"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "ارتفاع درجة غليان الماء يعود إلى وجود روابط هيدروجينية قوية بين الجزيئات، مما يتطلب طاقة أكبر لفصلها."
+                },
+                {
+                    id: 47,
+                    question: "تتغير الطاقة الداخلية للنظام عندما:",
+                    options: [
+                        "يتمدد الغاز في وعاء مغلق",
+                        "يبرد السائل في محيط بارد",
+                        "تحدث تفاعلات كيميائية",
+                        "كل ما سبق"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "الطاقة الداخلية للنظام تتغير عندما يحدث أي تغير في شكل المادة أو عندما تحدث تفاعلات كيميائية."
+                },
+                {
+                    id: 48,
+                    question: "عندما تكون ΔH سالبة في التفاعل الكيميائي، فإن التفاعل يكون:",
+                    options: [
+                        "ماصاً للحرارة",
+                        "طارداً للحرارة",
+                        "لا يحدث تغير في الحرارة",
+                        "يعتمد على درجة الحرارة"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "عندما تكون ΔH سالبة، فإن التفاعل يطلق حرارة إلى المحيط، ويسمى تفاعلًا طاردًا للحرارة."
+                },
+                {
+                    id: 49,
+                    question: "الطاقة اللازمة لكسر رابطة بين ذرتين تسمى:",
+                    options: [
+                        "طاقة التكوين",
+                        "طاقة الربط",
+                        "طاقة الذوبان",
+                        "طاقة التأين"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "طاقة الربط هي الطاقة اللازمة لكسر رابطة بين ذرتين في جزيء، وهي مقياس لقوة الرابطة."
+                },
+                {
+                    id: 50,
+                    question: "العملية التي تتميز بامتصاص الحرارة من المحيط هي:",
+                    options: [
+                        "تجمد الماء",
+                        "تكثف البخار",
+                        "ذوبان الثلج",
+                        "جميع ما سبق"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "ذوبان الثلج عملية ماصة للحرارة، حيث تمتص الحرارة من المحيط لتحويل الثلج إلى ماء."
+                },
+                {
+                    id: 51,
+                    question: "عندما يكون ΔH موجباً في التفاعل الكيميائي، فإن التفاعل يكون:",
+                    options: [
+                        "ماصاً للحرارة",
+                        "طارداً للحرارة",
+                        "لا يحدث تغير في الحرارة",
+                        "يعتمد على درجة الحرارة"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "عندما تكون ΔH موجبة، فإن التفاعل يمتص حرارة من المحيط، ويسمى تفاعلًا ماصًا للحرارة."
+                },
+                {
+                    id: 52,
+                    question: "الطاقة اللازمة لتحويل ذرة في الحالة الغازية إلى أيون موجب تسمى:",
+                    options: [
+                        "طاقة التكوين",
+                        "طاقة الربط",
+                        "طاقة الذوبان",
+                        "طاقة التأين"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "طاقة التأين هي الطاقة اللازمة لفصل إلكترون من ذرة في الحالة الغازية لتكوين أيون موجب."
+                },
+                {
+                    id: 53,
+                    question: "أي من العمليات التالية يصاحبه انخفاض في الإنتالبي؟",
+                    options: [
+                        "ذوبان كلوريد الأمونيوم في الماء",
+                        "تجمد الماء",
+                        "تحلل كربونات الكالسيوم",
+                        "ذوبان نترات البوتاسيوم في الماء"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "تجمد الماء عملية تطلق حرارة، حيث يتحول الماء من حالة سائلة إلى صلبة، مما يؤدي إلى انخفاض في الإنتالبي."
+                },
+                {
+                    id: 54,
+                    question: "التغير في الإنتالبي (ΔH) لتفاعل ما يمكن حسابه من خلال:",
+                    options: [
+                        "طاقة الربط للمتفاعلات ناقص طاقة الربط للنواتج",
+                        "طاقة الربط للنواتج ناقص طاقة الربط للمتفاعلات",
+                        "طاقة التكوين القياسية للنواتج ناقص طاقة التكوين القياسية للمتفاعلات",
+                        "طاقة التكوين القياسية للمتفاعلات ناقص طاقة التكوين القياسية للنواتج"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "التغير في الإنتالبي (ΔH) يحسب بطرح مجموع طاقات التكوين القياسية للمتفاعلات من مجموع طاقات التكوين القياسية للنواتج."
+                },
+                {
+                    id: 55,
+                    question: "أي من التفاعلات التالية يكون طاردًا للحرارة؟",
+                    options: [
+                        "2H₂O(l) → 2H₂(g) + O₂(g)",
+                        "N₂(g) + O₂(g) → 2NO(g)",
+                        "C(s) + O₂(g) → CO₂(g)",
+                        "NH₄Cl(s) → NH₄⁺(aq) + Cl⁻(aq)"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "تفاعل احتراق الكربون مع الأكسجين لتكوين ثاني أكسيد الكربون هو تفاعل طارد للحرارة، حيث تطلق الحرارة أثناء التفاعل."
+                },
+                {
+                    id: 56,
+                    question: "عندما تزداد طاقة الربط، فإن قوة الرابطة:",
+                    options: [
+                        "تزداد",
+                        "تقل",
+                        "تبقى ثابتة",
+                        "تعتمد على نوع الذرات"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "كلما زادت طاقة الربط، زادت قوة الرابطة بين الذرات، مما يجعل كسرها أصعب."
+                },
+                {
+                    id: 57,
+                    question: "الطاقة اللازمة لتكوين مول واحد من المركب من عناصره في حالتها القياسية تسمى:",
+                    options: [
+                        "طاقة التفكك",
+                        "طاقة الربط",
+                        "طاقة التكوين القياسية",
+                        "طاقة التأين"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "طاقة التكوين القياسية هي الطاقة اللازمة لتكوين مول واحد من المركب من عناصره في حالتها القياسية."
+                },
+                {
+                    id: 58,
+                    question: "تعتبر عملية التبخر:",
+                    options: [
+                        "طاردة للحرارة",
+                        "ماصة للحرارة",
+                        "لا تؤثر على الطاقة",
+                        "تعتمد على درجة الحرارة"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "عملية التبخر ماصة للحرارة، حيث تمتص الحرارة من المحيط لتحويل السائل إلى غاز."
+                },
+                {
+                    id: 59,
+                    question: "عندما تكون طاقة الربط للمتفاعلات أكبر من طاقة الربط للنواتج، فإن التفاعل يكون:",
+                    options: [
+                        "طاردًا للحرارة",
+                        "ماصًا للحرارة",
+                        "غير ممكن",
+                        "يعتمد على درجة الحرارة"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "إذا كانت طاقة الربط للمتفاعلات أكبر، فهذا يعني أن الطاقة اللازمة لكسر روابط المتفاعلات أكبر من الطاقة الناتجة عن تكوين روابط النواتج، مما يجعل التفاعل طاردًا للحرارة."
+                },
+                {
+                    id: 60,
+                    question: "العملية التي تتميز بالإطلاق الحراري هي:",
+                    options: [
+                        "ذوبان نترات الأمونيوم",
+                        "تجمد الماء",
+                        "تحلل كربونات الكالسيوم",
+                        "تبخر الماء"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "تجمد الماء عملية تطلق حرارة، حيث يتحول الماء من حالة سائلة إلى صلبة، مما يؤدي إلى إطلاق الحرارة إلى المحيط."
+                }
+            ],
+            
+            // المجموعة الخامسة: الحلول والتركيزات
+            unit5: [
+                {
+                    id: 61,
+                    question: "تركيز محلول يحتوي على 0.5 مول من المذاب في 2 لتر من المحلول يساوي:",
+                    options: [
+                        "0.25 مول/لتر",
+                        "0.5 مول/لتر",
+                        "1.0 مول/لتر",
+                        "2.0 مول/لتر"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "التركيز المولاري = عدد المولات / حجم المحلول باللتر = 0.5 / 2 = 0.25 مول/لتر."
+                },
+                {
+                    id: 62,
+                    question: "لتحضير 500 مل من محلول تركيزه 0.1 مول/لتر من كلوريد الصوديوم (NaCl)، كم جرامًا من الملح تحتاج؟ (الكتلة المولية لـ NaCl = 58.5 جرام/مول)",
+                    options: [
+                        "0.585 جرام",
+                        "2.925 جرام",
+                        "5.85 جرام",
+                        "29.25 جرام"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "عدد المولات = التركيز × الحجم = 0.1 × 0.5 = 0.05 مول. الكتلة = عدد المولات × الكتلة المولية = 0.05 × 58.5 = 2.925 جرام."
+                },
+                {
+                    id: 63,
+                    question: "إذا تم تخفيف 100 مل من محلول تركيزه 1.0 مول/لتر إلى 500 مل، فإن التركيز النهائي يساوي:",
+                    options: [
+                        "0.1 مول/لتر",
+                        "0.2 مول/لتر",
+                        "0.5 مول/لتر",
+                        "1.0 مول/لتر"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "باستخدام قانون التخفيف C1V1 = C2V2، نحصل على: (1.0)(100) = C2(500)، وبالتالي C2 = 0.2 مول/لتر."
+                },
+                {
+                    id: 64,
+                    question: "النسبة المئوية الكتلية لمحلول يحتوي على 20 جرام من المذاب في 180 جرام من المحلول تساوي:",
+                    options: [
+                        "10%",
+                        "11.1%",
+                        "20%",
+                        "25%"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "النسبة المئوية الكتلية = (كتلة المذاب / كتلة المحلول) × 100 = (20 / 200) × 100 = 10%."
+                },
+                {
+                    id: 65,
+                    question: "إذا كان تركيز محلول ما 2.0 مول/لتر، فما عدد المولات الموجودة في 750 مل من هذا المحلول؟",
+                    options: [
+                        "0.75 مول",
+                        "1.0 مول",
+                        "1.5 مول",
+                        "2.0 مول"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "عدد المولات = التركيز × الحجم باللتر = 2.0 × 0.75 = 1.5 مول."
+                },
+                {
+                    id: 66,
+                    question: "تركيز أيون الكلوريد في محلول 0.2 مول/لتر من كلوريد الكالسيوم (CaCl₂) يساوي:",
+                    options: [
+                        "0.1 مول/لتر",
+                        "0.2 مول/لتر",
+                        "0.4 مول/لتر",
+                        "0.6 مول/لتر"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "كلوريد الكالسيوم (CaCl₂) يتفكك إلى أيون واحد من Ca²⁺ وأيونين من Cl⁻، وبالتالي تركيز أيون الكلوريد = 2 × 0.2 = 0.4 مول/لتر."
+                },
+                {
+                    id: 67,
+                    question: "لتحضير 250 مل من محلول تركيزه 0.2 مول/لتر من هيدروكسيد الصوديوم (NaOH)، كم جرامًا تحتاج؟ (الكتلة المولية لـ NaOH = 40 جرام/مول)",
+                    options: [
+                        "1.0 جرام",
+                        "2.0 جرام",
+                        "4.0 جرام",
+                        "8.0 جرام"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "عدد المولات = التركيز × الحجم = 0.2 × 0.25 = 0.05 مول. الكتلة = عدد المولات × الكتلة المولية = 0.05 × 40 = 2.0 جرام."
+                },
+                {
+                    id: 68,
+                    question: "إذا تم خلط 50 مل من محلول 1.0 مول/لتر مع 150 مل من محلول 0.5 مول/لتر من نفس المذاب، فإن التركيز النهائي يساوي:",
+                    options: [
+                        "0.625 مول/لتر",
+                        "0.75 مول/لتر",
+                        "0.875 مول/لتر",
+                        "1.0 مول/لتر"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "إجمالي المولات = (1.0 × 0.05) + (0.5 × 0.15) = 0.05 + 0.075 = 0.125 مول. إجمالي الحجم = 0.05 + 0.15 = 0.2 لتر. التركيز النهائي = 0.125 / 0.2 = 0.625 مول/لتر."
+                },
+                {
+                    id: 69,
+                    question: "تركيز محلول يحتوي على 5 جرام من NaOH في 250 مل من المحلول يساوي:",
+                    options: [
+                        "0.25 مول/لتر",
+                        "0.5 مول/لتر",
+                        "1.0 مول/لتر",
+                        "2.0 مول/لتر"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "عدد المولات = الكتلة / الكتلة المولية = 5 / 40 = 0.125 مول. التركيز = عدد المولات / الحجم باللتر = 0.125 / 0.25 = 0.5 مول/لتر."
+                },
+                {
+                    id: 70,
+                    question: "إذا كان لديك محلول تركيزه 4.0 مول/لتر وتحتاج إلى تحضير 100 مل من محلول تركيزه 1.0 مول/لتر، فما حجم المحلول المركز الذي تحتاجه؟",
+                    options: [
+                        "10 مل",
+                        "25 مل",
+                        "50 مل",
+                        "100 مل"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "باستخدام قانون التخفيف C1V1 = C2V2، نحصل على: (4.0)(V1) = (1.0)(100)، وبالتالي V1 = 25 مل."
+                },
+                {
+                    id: 71,
+                    question: "النسبة المئوية الحجمية لمحلول يحتوي على 30 مل من الكحول في 120 مل من المحلول تساوي:",
+                    options: [
+                        "20%",
+                        "25%",
+                        "30%",
+                        "40%"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "النسبة المئوية الحجمية = (حجم المذاب / حجم المحلول) × 100 = (30 / 120) × 100 = 25%."
+                },
+                {
+                    id: 72,
+                    question: "إذا كان تركيز محلول من حمض الهيدروكلوريك 2.0 مول/لتر، فما التركيز عند تخفيف 50 مل منه إلى 200 مل؟",
+                    options: [
+                        "0.25 مول/لتر",
+                        "0.5 مول/لتر",
+                        "1.0 مول/لتر",
+                        "4.0 مول/لتر"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "باستخدام قانون التخفيف C1V1 = C2V2، نحصل على: (2.0)(50) = C2(200)، وبالتالي C2 = 0.5 مول/لتر."
+                },
+                {
+                    id: 73,
+                    question: "تركيز أيون الصوديوم في محلول 0.3 مول/لتر من كبريتات الصوديوم (Na₂SO₄) يساوي:",
+                    options: [
+                        "0.3 مول/لتر",
+                        "0.6 مول/لتر",
+                        "0.9 مول/لتر",
+                        "1.2 مول/لتر"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "كبريتات الصوديوم (Na₂SO₄) يتفكك إلى أيونين من Na⁺ وأيون واحد من SO₄²⁻، وبالتالي تركيز أيون الصوديوم = 2 × 0.3 = 0.6 مول/لتر."
+                },
+                {
+                    id: 74,
+                    question: "كم جرامًا من NaCl تحتاج لتحضير 400 مل من محلول تركيزه 0.5 مول/لتر؟ (الكتلة المولية لـ NaCl = 58.5 جرام/مول)",
+                    options: [
+                        "5.85 جرام",
+                        "11.7 جرام",
+                        "23.4 جرام",
+                        "46.8 جرام"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "عدد المولات = التركيز × الحجم = 0.5 × 0.4 = 0.2 مول. الكتلة = عدد المولات × الكتلة المولية = 0.2 × 58.5 = 11.7 جرام."
+                },
+                {
+                    id: 75,
+                    question: "إذا كان لديك محلول تركيزه 6.0 مول/لتر، فما حجمه الذي يحتوي على 0.9 مول من المذاب؟",
+                    options: [
+                        "100 مل",
+                        "150 مل",
+                        "200 مل",
+                        "300 مل"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الحجم = عدد المولات / التركيز = 0.9 / 6.0 = 0.15 لتر = 150 مل."
+                }
+            ],
+            
+            // المجموعة السادسة: الامتحان الشامل - الجزء 1
+            unit6: [
+                {
+                    id: 76,
+                    question: "عدد الروابط سيغما (σ) في جزيء الإيثاين (H-C≡C-H) يساوي:",
+                    options: [
+                        "3",
+                        "4",
+                        "5",
+                        "6"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "في جزيء الإيثاين (H-C≡C-H) يوجد ثلاث روابط سيغما: واحدة بين كل ذرة هيدروجين وكربون، ورابطة سيغما واحدة بين ذرتي الكربون، بالإضافة إلى رابطتي باي (π) بين ذرتي الكربون."
+                },
+                {
+                    id: 77,
+                    question: "الشكل الهندسي لجزيء الميثان (CH₄) هو:",
+                    options: [
+                        "خطي",
+                        "ثماني الوجوه",
+                        "هرمي مثلثي",
+                        "رباعي السطوح"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "جزيء الميثان يتخذ الشكل الرباعي السطوح بسبب وجود أربع روابط تساهمية حول ذرة الكربون المركزية دون وجود أزواج إلكترونية حرة."
+                },
+                {
+                    id: 78,
+                    question: "من بين المركبات التالية، المركب الذي يذوب في الماء بسهولة هو:",
+                    options: [
+                        "CH₄",
+                        "C₂H₆",
+                        "C₆H₆",
+                        "NH₃"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "الأمونيا (NH₃) يذوب في الماء بسهولة بسبب تكوين روابط هيدروجينية مع جزيئات الماء، بينما المركبات الأخرى هيدروكربونات غير قطبية."
+                },
+                {
+                    id: 79,
+                    question: "عدد الإلكترونات غير المزاوجة في جزيء الأكسجين (O₂) حسب نظرية المدارات الجزيئية هو:",
+                    options: [
+                        "0",
+                        "1",
+                        "2",
+                        "3"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "الجزيء يحتوي على إلكترونين غير مزاوجين في مدارتي antibonding نصف ممتلئتين، مما يفسر الخواص المغناطيسية للأكسجين."
+                },
+                {
+                    id: 80,
+                    question: "درجة غليان HF أعلى من HCl بسبب:",
+                    options: [
+                        "الكتلة الجزيئية الأكبر لـ HF",
+                        "وجود روابط هيدروجينية في HF",
+                        "القطبية الأعلى لـ HCl",
+                        "قوة الرابطة التساهمية في HF"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "الهيدروفلوريد (HF) يحتوي على روابط هيدروجينية قوية بين الجزيئات، مما يرفع درجة غليانه مقارنة بـ HCl الذي لا يحتوي على روابط هيدروجينية."
+                },
+                {
+                    id: 81,
+                    question: "الزاوية بين الروابط في جزيء ثاني أكسيد الكبريت (SO₂) أقل من 120° بسبب:",
+                    options: [
+                        "وجود زوج إلكتروني حر على ذرة الكبريت",
+                        "الشحنة الموجبة على ذرة الكبريت",
+                        "الشحنة السالبة على ذرات الأكسجين",
+                        "وجود روابط باي بين الكبريت والأكسجين"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "الجزيء يحتوي على زوج إلكتروني حر على ذرة الكبريت، مما يسبب تنافرًا إضافيًا ويقلل الزاوية بين الروابط عن القيمة المثالية 120°."
+                },
+                {
+                    id: 82,
+                    question: "الرابطة في جزيء الهيدروجين (H₂) هي رابطة:",
+                    options: [
+                        "أيونية",
+                        "سيغما (σ)",
+                        "باي (π)",
+                        "سيغما وباي"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "رابطة الهيدروجين هي رابطة سيغما (σ) ناتجة عن التداخل المباشر بين مداري 1s للذرتين."
+                },
+                {
+                    id: 83,
+                    question: "المركب الذي يشكل شبكة بلورية أيونية هو:",
+                    options: [
+                        "CO₂",
+                        "H₂O",
+                        "NaCl",
+                        "CH₄"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "كلوريد الصوديوم (NaCl) يشكل شبكة بلورية أيونية منتظمة بسبب الروابط الأيونية القوية بين أيونات الصوديوم والكلوريد."
+                },
+                {
+                    id: 84,
+                    question: "إذا كانت عدد المدارات المهجنة في ذرة ما هو 3، فإن الشكل الهندسي المتوقع هو:",
+                    options: [
+                        "خطي",
+                        "ثماني الوجوه",
+                        "مستوي مثلثي",
+                        "رباعي السطوح"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "التهجين sp² ينتج عنه ثلاثة مدارات مهجنة موجهة في مستوى واحد بزوايا 120°، مما ينتج عنه شكلًا هندسيًا مستويًا مثلثيًا."
+                },
+                {
+                    id: 85,
+                    question: "نوع التهجين في ذرة النيتروجين في جزيء NH₃ هو:",
+                    options: [
+                        "sp",
+                        "sp²",
+                        "sp³",
+                        "dsp²"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "في جزيء الأمونيا NH₃، تكون ذرة النيتروجين مهجنة من النوع sp³ مع وجود زوج إلكتروني حر."
+                },
+                {
+                    id: 86,
+                    question: "الجزيء الذي يحتوي على روابط من نوع باي (π) هو:",
+                    options: [
+                        "H₂",
+                        "N₂",
+                        "F₂",
+                        "Cl₂"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "جزيء النيتروجين (N₂) يحتوي على رابطة ثلاثية تتكون من رابطة سيغما واحدة ورابطتي باي، بينما الجزيئات الأخرى تحتوي على روابط أحادية سيغما فقط."
+                },
+                {
+                    id: 87,
+                    question: "الجزيء الذي يمتلك شكلًا منحنيًا هو:",
+                    options: [
+                        "CO₂",
+                        "BF₃",
+                        "H₂O",
+                        "CH₄"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "جزيء الماء (H₂O) يمتلك شكلًا منحنيًا بسبب وجود زوجين من الإلكترونات غير الرابطة على ذرة الأكسجين."
+                },
+                {
+                    id: 88,
+                    question: "الجزيء الذي يحتوي على زوج إلكتروني حر هو:",
+                    options: [
+                        "CO₂",
+                        "BF₃",
+                        "NH₃",
+                        "CH₄"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "جزيء الأمونيا NH₃ يحتوي على زوج إلكتروني حر على ذرة النيتروجين، بينما الجزيئات الأخرى لا تحتوي على أزواج حرة."
+                },
+                {
+                    id: 89,
+                    question: "السبب في ارتفاع درجة غليان الماء مقارنة بالمركبات الهيدروجينية الأخرى هو:",
+                    options: [
+                        "الكتلة الجزيئية العالية",
+                        "الروابط الهيدروجينية القوية",
+                        "الروابط التساهمية",
+                        "الكتلة النوعية العالية"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "ارتفاع درجة غليان الماء يعود إلى وجود روابط هيدروجينية قوية بين الجزيئات، مما يتطلب طاقة أكبر لفصلها."
+                },
+                {
+                    id: 90,
+                    question: "الترتيب الصحيح للطاقة للمدارات الجزيئية في جزيء N₂ هو:",
+                    options: [
+                        "σ1s < σ*1s < σ2s < σ*2s < π2p < σ2p < π*2p < σ*2p",
+                        "σ1s < σ*1s < σ2s < σ*2s < σ2p < π2p < π*2p < σ*2p",
+                        "σ1s < σ*1s < σ2s < σ*2s < σ2p < π2p < σ*2p < π*2p",
+                        "σ1s < σ*1s < σ2s < σ*2s < π2p < σ2p < σ*2p < π*2p"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "في جزيء النيتروجين، تكون طاقة المدار σ2p أقل من طاقة المدار π2p، وذلك بسبب التداخل القوي بين المدارات."
+                }
+            ],
+            
+            // المجموعة السابعة: الامتحان الشامل - الجزء 2
+            unit7: [
+                {
+                    id: 91,
+                    question: "الجزيء الذي يحتوي على ثلاث روابط سيغما (σ) هو:",
+                    options: [
+                        "CH₄",
+                        "NH₃",
+                        "H₂O",
+                        "BF₃"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "جزيء الأمونيا (NH₃) يحتوي على ثلاث روابط سيغما بين ذرة النيتروجين وذرتي الهيدروجين."
+                },
+                {
+                    id: 92,
+                    question: "الزاوية بين الروابط في جزيء BF₃ تساوي:",
+                    options: [
+                        "90°",
+                        "109.5°",
+                        "120°",
+                        "180°"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "الزاوية في جزيء BF₃ تساوي 120° بسبب الشكل المستوي المثلثي."
+                },
+                {
+                    id: 93,
+                    question: "نوع التهجين في نياثيل الإيثيلين (H-C≡C-H) هو:",
+                    options: [
+                        "sp",
+                        "sp²",
+                        "sp³",
+                        "dsp³"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "في جزيء الهيدروكربون غير المشبع الإيثاين (H-C≡C-H)، تكون الذرات المهجنة من النوع sp بسبب وجود رابطة ثلاثية."
+                },
+                {
+                    id: 94,
+                    question: "السبب الرئيسي لانخفاض درجة غليان المركبات الهيدروكربونية هو:",
+                    options: [
+                        "الكتلة الجزيئية المنخفضة",
+                        "الروابط الهيدروجينية الضعيفة",
+                        "الروابط التساهمية القوية",
+                        "القوى بين الجزيئية الضعيفة"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "الهيدروكربونات غير قطبية وتتأثر بقوى لندن الضعيفة بين الجزيئات، مما يؤدي إلى درجات غليان منخفضة."
+                },
+                {
+                    id: 95,
+                    question: "عندما تكون ΔH سالبة في التفاعل الكيميائي، فإن التفاعل يكون:",
+                    options: [
+                        "ماصاً للحرارة",
+                        "طارداً للحرارة",
+                        "لا يحدث تغير في الحرارة",
+                        "يعتمد على درجة الحرارة"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "عندما تكون ΔH سالبة، فإن التفاعل يطلق حرارة إلى المحيط، ويسمى تفاعلًا طاردًا للحرارة."
+                },
+                {
+                    id: 96,
+                    question: "الطاقة اللازمة لكسر رابطة بين ذرتين تسمى:",
+                    options: [
+                        "طاقة التكوين",
+                        "طاقة الربط",
+                        "طاقة الذوبان",
+                        "طاقة التأين"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "طاقة الربط هي الطاقة اللازمة لكسر رابطة بين ذرتين في جزيء، وهي مقياس لقوة الرابطة."
+                },
+                {
+                    id: 97,
+                    question: "العملية التي تتميز بامتصاص الحرارة من المحيط هي:",
+                    options: [
+                        "تجمد الماء",
+                        "تكثف البخار",
+                        "ذوبان الثلج",
+                        "جميع ما سبق"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "ذوبان الثلج عملية ماصة للحرارة، حيث تمتص الحرارة من المحيط لتحويل الثلج إلى ماء."
+                },
+                {
+                    id: 98,
+                    question: "تركيز محلول يحتوي على 0.5 مول من المذاب في 2 لتر من المحلول يساوي:",
+                    options: [
+                        "0.25 مول/لتر",
+                        "0.5 مول/لتر",
+                        "1.0 مول/لتر",
+                        "2.0 مول/لتر"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "التركيز المولاري = عدد المولات / حجم المحلول باللتر = 0.5 / 2 = 0.25 مول/لتر."
+                },
+                {
+                    id: 99,
+                    question: "لتحضير 500 مل من محلول تركيزه 0.1 مول/لتر من كلوريد الصوديوم (NaCl)، كم جرامًا من الملح تحتاج؟ (الكتلة المولية لـ NaCl = 58.5 جرام/مول)",
+                    options: [
+                        "0.585 جرام",
+                        "2.925 جرام",
+                        "5.85 جرام",
+                        "29.25 جرام"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "عدد المولات = التركيز × الحجم = 0.1 × 0.5 = 0.05 مول. الكتلة = عدد المولات × الكتلة المولية = 0.05 × 58.5 = 2.925 جرام."
+                },
+                {
+                    id: 100,
+                    question: "إذا تم تخفيف 100 مل من محلول تركيزه 1.0 مول/لتر إلى 500 مل، فإن التركيز النهائي يساوي:",
+                    options: [
+                        "0.1 مول/لتر",
+                        "0.2 مول/لتر",
+                        "0.5 مول/لتر",
+                        "1.0 مول/لتر"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "باستخدام قانون التخفيف C1V1 = C2V2، نحصل على: (1.0)(100) = C2(500)، وبالتالي C2 = 0.2 مول/لتر."
+                },
+                {
+                    id: 101,
+                    question: "النسبة المئوية الكتلية لمحلول يحتوي على 20 جرام من المذاب في 180 جرام من المحلول تساوي:",
+                    options: [
+                        "10%",
+                        "11.1%",
+                        "20%",
+                        "25%"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "النسبة المئوية الكتلية = (كتلة المذاب / كتلة المحلول) × 100 = (20 / 200) × 100 = 10%."
+                },
+                {
+                    id: 102,
+                    question: "إذا كان تركيز محلول ما 2.0 مول/لتر، فما عدد المولات الموجودة في 750 مل من هذا المحلول؟",
+                    options: [
+                        "0.75 مول",
+                        "1.0 مول",
+                        "1.5 مول",
+                        "2.0 مول"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "عدد المولات = التركيز × الحجم باللتر = 2.0 × 0.75 = 1.5 مول."
+                },
+                {
+                    id: 103,
+                    question: "تركيز أيون الكلوريد في محلول 0.2 مول/لتر من كلوريد الكالسيوم (CaCl₂) يساوي:",
+                    options: [
+                        "0.1 مول/لتر",
+                        "0.2 مول/لتر",
+                        "0.4 مول/لتر",
+                        "0.6 مول/لتر"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "كلوريد الكالسيوم (CaCl₂) يتفكك إلى أيون واحد من Ca²⁺ وأيونين من Cl⁻، وبالتالي تركيز أيون الكلوريد = 2 × 0.2 = 0.4 مول/لتر."
+                },
+                {
+                    id: 104,
+                    question: "التغير في الإنتالبي (ΔH) لتفاعل ما يمكن حسابه من خلال:",
+                    options: [
+                        "طاقة الربط للمتفاعلات ناقص طاقة الربط للنواتج",
+                        "طاقة الربط للنواتج ناقص طاقة الربط للمتفاعلات",
+                        "طاقة التكوين القياسية للنواتج ناقص طاقة التكوين القياسية للمتفاعلات",
+                        "طاقة التكوين القياسية للمتفاعلات ناقص طاقة التكوين القياسية للنواتج"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "التغير في الإنتالبي (ΔH) يحسب بطرح مجموع طاقات التكوين القياسية للمتفاعلات من مجموع طاقات التكوين القياسية للنواتج."
+                },
+                {
+                    id: 105,
+                    question: "أي من التفاعلات التالية يكون طاردًا للحرارة؟",
+                    options: [
+                        "2H₂O(l) → 2H₂(g) + O₂(g)",
+                        "N₂(g) + O₂(g) → 2NO(g)",
+                        "C(s) + O₂(g) → CO₂(g)",
+                        "NH₄Cl(s) → NH₄⁺(aq) + Cl⁻(aq)"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "تفاعل احتراق الكربون مع الأكسجين لتكوين ثاني أكسيد الكربون هو تفاعل طارد للحرارة، حيث تطلق الحرارة أثناء التفاعل."
+                }
+            ]
+        };
+
+        // المتغيرات الأساسية للتطبيق
+        let selectedTopic = 'unit1';
+        let questions = [];
+        let userAnswers = {};
+        let timeLeft = 30 * 60; // 30 minutes in seconds
+        let timerInterval;
+        let examStarted = false;
+
+        // دوال التطبيق الأساسية
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            setupTagListeners();
+        });
+
+        function setupEventListeners() {
+            document.getElementById('generate-exam').addEventListener('click', generateExam);
+            document.getElementById('show-answers').addEventListener('click', toggleAnswers);
+            document.getElementById('submit-exam').addEventListener('click', submitExam);
+            document.getElementById('new-exam').addEventListener('click', resetExam);
+        }
+
+        function setupTagListeners() {
+            document.querySelectorAll('.topic-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // تغيير الموضوع المختار
+                    document.querySelectorAll('.topic-tag').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedTopic = this.getAttribute('data-topic');
+                    
+                    // تحديث عنوان الامتحان
+                    const topicNames = {
+                        unit1: "الروابط الكيميائية",
+                        unit2: "الهندسة الجزيئية",
+                        unit3: "خصائص المركبات",
+                        unit4: "الطاقة في التفاعلات",
+                        unit5: "الحلول والتركيزات",
+                        unit6: "الامتحان الشامل - الجزء 1",
+                        unit7: "الامتحان الشامل - الجزء 2"
+                    };
+                    
+                    document.getElementById('exam-title').textContent = `امتحان في ${topicNames[selectedTopic]}`;
+                });
+            });
+        }
+
+        function generateExam() {
+            // الحصول على الأسئلة من الموضوع المختار
+            const questionPool = questionBank[selectedTopic];
+            
+            // اختيار جميع الأسئلة (15 سؤالاً)
+            questions = [...questionPool];
+            
+            // عرض حاوية الامتحان
+            document.getElementById('exam-container').style.display = 'block';
+            
+            // إنشاء الأسئلة
+            renderQuestions();
+            
+            // بدء المؤقت
+            startTimer();
+            
+            examStarted = true;
+        }
+
+        function renderQuestions() {
+            const questionsContainer = document.getElementById('questions-container');
+            questionsContainer.innerHTML = '';
+            
+            questions.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.innerHTML = `
+                    <div class="question-number">السؤال ${index + 1}:</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">
+                        ${question.options.map((option, i) => `
+                            <div class="option">
+                                <input type="radio" name="question-${question.id}" id="q${question.id}-opt${i}" value="${i}">
+                                <label for="q${question.id}-opt${i}">${option}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="correct-answer" id="answer-${question.id}">
+                        <strong>الإجابة الصحيحة:</strong> ${question.options[question.correctAnswer]}
+                        <br>
+                        <strong>الشرح:</strong> ${question.explanation}
+                    </div>
+                `;
+                questionsContainer.appendChild(questionElement);
+            });
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitExam();
+                return;
+            }
+            
+            timeLeft--;
+            
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function toggleAnswers() {
+            const answers = document.querySelectorAll('.correct-answer');
+            const isHidden = answers[0].style.display === 'none';
+            
+            answers.forEach(answer => {
+                answer.style.display = isHidden ? 'block' : 'none';
+            });
+            
+            document.getElementById('show-answers').textContent = 
+                isHidden ? 'إخفاء الإجابات' : 'عرض الإجابات';
+        }
+
+        function submitExam() {
+            // تحقق من الإجابات
+            let correctCount = 0;
+            
+            questions.forEach(question => {
+                const selectedOption = document.querySelector(`input[name="question-${question.id}"]:checked`);
+                if (selectedOption && parseInt(selectedOption.value) === question.correctAnswer) {
+                    correctCount++;
+                }
+            });
+            
+            // حساب النسبة المئوية
+            const percentage = (correctCount / questions.length) * 100;
+            const grade = percentage >= 85 ? 'ممتاز' : 
+                          percentage >= 70 ? 'جيد جدًا' : 
+                          percentage >= 60 ? 'جيد' : 'يحتاج لمراجعة';
+            
+            // عرض النتيجة
+            alert(`نتائج الامتحان:\nعدد الأسئلة الصحيحة: ${correctCount} من ${questions.length}\nالنسبة المئوية: ${percentage.toFixed(1)}%\nالتقييم: ${grade}`);
+            
+            // إظهار جميع الإجابات الصحيحة
+            document.querySelectorAll('.correct-answer').forEach(answer => {
+                answer.style.display = 'block';
+            });
+            
+            // تعطيل زر التقديم
+            document.getElementById('submit-exam').disabled = true;
+            document.getElementById('submit-exam').textContent = 'تم التقديم';
+        }
+
+        function resetExam() {
+            if (!examStarted) return;
+            
+            if (confirm("هل أنت متأكد من بدء امتحان جديد؟ سيتم فقدان جميع الإجابات الحالية.")) {
+                document.getElementById('exam-container').style.display = 'none';
+                clearInterval(timerInterval);
+                timeLeft = 30 * 60;
+                userAnswers = {};
+                examStarted = false;
+            }
+        }
+    </script>
+</body>
+</html>
+
+

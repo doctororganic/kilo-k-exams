@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Science Exam Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
+  
+  <main class="container mx-auto px-6 py-12">
+    <h1 class="text-4xl font-bold text-white text-center mb-12">
+      📚 Science Exam Center
+    </h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+      
+      <!-- Chemistry 10 / الكيمياء عاشر -->
+      <a href="/exams/chemistry-10.html" 
+         target="_blank"
+         class="group block p-8 bg-slate-800 rounded-2xl shadow-2xl hover:shadow-cyan-500/50 hover:shadow-xl transition-all duration-300 border border-slate-700 hover:border-cyan-500 transform hover:-translate-y-2">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Chemistry</h2>
+            <h2 class="text-xl font-bold text-white">الكيمياء</h2>
+          </div>
+          <span class="text-3xl">🧪</span>
+        </div>
+        <p class="text-slate-400 text-lg">Grade 10</p>
+        <p class="text-slate-400 text-lg">الصف العاشر</p>
+        <div class="mt-2">
+          <p class="text-cyan-400 text-sm">Official Ministry Exams</p>
+          <p class="text-cyan-400 text-sm">الامتحانات الرسمية للوزارة</p>
+        </div>
+        <p class="text-cyan-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          Click to open exam →
+        </p>
+        <p class="text-cyan-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+          اضغط لفتح الامتحان ←
+        </p>
+      </a>
+
+      <!-- Chemistry 11 / الكيمياء حادي عشر -->
+      <a href="/exams/chemistry-11.html" 
+         target="_blank"
+         class="group block p-8 bg-slate-800 rounded-2xl shadow-2xl hover:shadow-cyan-500/50 hover:shadow-xl transition-all duration-300 border border-slate-700 hover:border-cyan-500 transform hover:-translate-y-2">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Chemistry</h2>
+            <h2 class="text-xl font-bold text-white">الكيمياء</h2>
+          </div>
+          <span class="text-3xl">⚗️</span>
+        </div>
+        <p class="text-slate-400 text-lg">Grade 11</p>
+        <p class="text-slate-400 text-lg">الصف الحادي عشر</p>
+        <p class="text-cyan-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          Click to open exam →
+        </p>
+        <p class="text-cyan-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+          اضغط لفتح الامتحان ←
+        </p>
+      </a>
+
+      <!-- Biology 12 / احياء ثاني عشر -->
+      <a href="/exams/biology-12.html" 
+         target="_blank"
+         class="group block p-8 bg-slate-800 rounded-2xl shadow-2xl hover:shadow-emerald-500/50 hover:shadow-xl transition-all duration-300 border border-slate-700 hover:border-emerald-500 transform hover:-translate-y-2">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Biology</h2>
+            <h2 class="text-xl font-bold text-white">الأحياء</h2>
+          </div>
+          <span class="text-3xl">🧬</span>
+        </div>
+        <p class="text-slate-400 text-lg">Grade 12</p>
+        <p class="text-slate-400 text-lg">الصف الثاني عشر</p>
+        <p class="text-emerald-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          Click to open exam →
+        </p>
+        <p class="text-emerald-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+          اضغط لفتح الامتحان ←
+        </p>
+      </a>
+
+      <!-- Physics 10 / فيزياء عاشر -->
+      <a href="/exams/physics-10.html" 
+         target="_blank"
+         class="group block p-8 bg-slate-800 rounded-2xl shadow-2xl hover:shadow-blue-500/50 hover:shadow-xl transition-all duration-300 border border-slate-700 hover:border-blue-500 transform hover:-translate-y-2">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Physics</h2>
+            <h2 class="text-xl font-bold text-white">الفيزياء</h2>
+          </div>
+          <span class="text-3xl">⚡</span>
+        </div>
+        <p class="text-slate-400 text-lg">Grade 10</p>
+        <p class="text-slate-400 text-lg">الصف العاشر</p>
+        <p class="text-blue-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          Click to open exam →
+        </p>
+        <p class="text-blue-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+          اضغط لفتح الامتحان ←
+        </p>
+      </a>
+
+      <!-- Physics 11 / فيزياء حادي عشر -->
+      <a href="/exams/physics-11.html" 
+         target="_blank"
+         class="group block p-8 bg-slate-800 rounded-2xl shadow-2xl hover:shadow-blue-500/50 hover:shadow-xl transition-all duration-300 border border-slate-700 hover:border-blue-500 transform hover:-translate-y-2">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Physics</h2>
+            <h2 class="text-xl font-bold text-white">الفيزياء</h2>
+          </div>
+          <span class="text-3xl">🔭</span>
+        </div>
+        <p class="text-slate-400 text-lg">Grade 11</p>
+        <p class="text-slate-400 text-lg">الصف الحادي عشر</p>
+        <p class="text-blue-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          Click to open exam →
+        </p>
+        <p class="text-blue-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+          اضغط لفتح الامتحان ←
+        </p>
+      </a>
+
+      <!-- Biology 12 External / احياء ثاني عشر -->
+      <a href="https://chat.qwen.ai/s/deploy/t_4c8d6cad-1407-44ef-8cf4-3a51e98a7626" 
+         target="_blank"
+         class="group block p-8 bg-slate-800 rounded-2xl shadow-2xl hover:shadow-emerald-500/50 hover:shadow-xl transition-all duration-300 border border-slate-700 hover:border-emerald-500 transform hover:-translate-y-2">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Biology 12</h2>
+            <h2 class="text-xl font-bold text-white">احياء ثاني عشر</h2>
+          </div>
+          <span class="text-3xl">🧬</span>
+        </div>
+        <p class="text-slate-400 text-lg">External Resource</p>
+        <p class="text-slate-400 text-lg">مورد خارجي</p>
+        <p class="text-emerald-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          Click to open external resource →
+        </p>
+        <p class="text-emerald-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+          اضغط لفتح المورد الخارجي ←
+        </p>
+      </a>
+
+      <!-- Physics 12 External / فيرياء ثاني عشر -->
+      <a href="https://chat.qwen.ai/s/deploy/t_0be9941d-2c64-4cb1-a376-e2028290ed2b" 
+         target="_blank"
+         class="group block p-8 bg-slate-800 rounded-2xl shadow-2xl hover:shadow-blue-500/50 hover:shadow-xl transition-all duration-300 border border-slate-700 hover:border-blue-500 transform hover:-translate-y-2">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Physics 12</h2>
+            <h2 class="text-xl font-bold text-white">فيرياء ثاني عشر</h2>
+          </div>
+          <span class="text-3xl">🔭</span>
+        </div>
+        <p class="text-slate-400 text-lg">External Resource</p>
+        <p class="text-slate-400 text-lg">مورد خارجي</p>
+        <p class="text-blue-400 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+          Click to open external resource →
+        </p>
+        <p class="text-blue-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+          اضغط لفتح المورد الخارجي ←
+        </p>
+      </a>
+
+    </div>
+  </main>
+
+  <footer class="text-center text-slate-500 mt-16">
+    <p>Exam Portal © 2025 | Built with modern web tech</p>
+    <p>بوابة الامتحانات © 2025 | مبنية بتقنيات الويب الحديثة</p>
+  </footer>
+
+</body>
+</html>

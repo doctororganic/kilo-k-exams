@@ -1,13 +1,40 @@
 import { createClient } from '@supabase/supabase-js'
+import { logger, apiLogger } from '../utils/logger'
+import { handleAsyncError, validateEnvironmentVariables, DatabaseError } from '../utils/errorHandler'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || ''
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase environment variables are not set')
+// Validate environment variables
+try {
+  validateEnvironmentVariables(['VITE_SUPABASE_URL', 'VITE_SUPABASE_ANON_KEY'])
+  logger.info('Supabase environment variables validated successfully', 'SUPABASE_INIT')
+} catch (error) {
+  logger.error('Failed to validate Supabase environment variables', 'SUPABASE_INIT', { error })
+  throw error
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: false,
+  },
+  global: {
+    headers: {
+      'x-application-name': 'kilo-k-exams',
+    },
+  },
+})
+
+// Test connection on initialization
+supabase.auth.getSession().then(({ data, error }) => {
+  if (error) {
+    apiLogger.error('Failed to initialize Supabase connection', { error: error.message })
+  } else {
+    apiLogger.info('Supabase connection initialized successfully')
+  }
+})
 
 // Database types
 export interface User {

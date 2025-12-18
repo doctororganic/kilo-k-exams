@@ -516,8 +516,9 @@ const Biology12: React.FC = () => {
       {/* Promotional Box */}
       {showPromotionalBox && (
         <PromotionalBox
+          isVisible={true}
           onClose={closePromotionalBox}
-          onFormSubmit={handleFormSubmission}
+          onCompleteForm={handleFormSubmission}
         />
       )}
     </div>

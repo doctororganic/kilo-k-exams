@@ -40,7 +40,7 @@ const Chemistry10: React.FC = () => {
     return Array.from({ length: 10 }, (_, g) =>
       Array.from({ length: 11 }, (_, q) => ({
         id: `P-${g + 1}-${q + 1}`,
-        type: q % 3 === 0 ? 'mcq' : q % 3 === 1 ? 'trueFalse' : 'matching',
+        type: q % 3 === 0 ? 'mcq' : q % 3 === 1 ? 'trueFalse' : 'essay',
         score: q === 10 ? 2 : 1,
         question: `سؤال ${q + 1} — مجموعة ${g + 1} — تدريبي`,
         options: q % 3 === 0 ? ["أ", "ب", "ج", "د"] : undefined,
@@ -547,17 +547,16 @@ const Chemistry10: React.FC = () => {
 
       {/* Standardized Promotional Box */}
       <PromotionalBox
-        isOpen={showPromoBox}
+        isVisible={showPromoBox}
         onClose={() => setShowPromoBox(false)}
-        onSubmit={() => setShowPromoBox(false)}
+        onCompleteForm={() => setShowPromoBox(false)}
       />
 
       {/* Completion Message for Official Exams */}
       <PromotionalBox
-        isOpen={showExamCompletedMessage}
+        isVisible={showExamCompletedMessage}
         onClose={() => setShowExamCompletedMessage(false)}
-        onSubmit={() => setShowExamCompletedMessage(false)}
-        isCompletionMessage={true}
+        onCompleteForm={() => setShowExamCompletedMessage(false)}
       />
 
       {/* Results */}

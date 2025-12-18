@@ -579,17 +579,16 @@ const Physics10: React.FC = () => {
 
           {/* Standardized Promotional Box */}
           <PromotionalBox
-            isOpen={showPromoBox}
+            isVisible={showPromoBox}
             onClose={() => setShowPromoBox(false)}
-            onSubmit={() => setShowPromoBox(false)}
+            onCompleteForm={() => setShowPromoBox(false)}
           />
 
           {/* Completion Message for Comprehensive Exams */}
           <PromotionalBox
-            isOpen={showExamCompletedMessage}
+            isVisible={showExamCompletedMessage}
             onClose={() => setShowExamCompletedMessage(false)}
-            onSubmit={() => setShowExamCompletedMessage(false)}
-            isCompletionMessage={true}
+            onCompleteForm={() => setShowExamCompletedMessage(false)}
           />
         </div>
       </div>

@@ -681,9 +681,9 @@ const Physics11: React.FC = () => {
 
       {/* Promotional Box */}
       <PromotionalBox
-        isOpen={showPromotionalBox}
+        isVisible={showPromotionalBox}
         onClose={() => setShowPromotionalBox(false)}
-        onFormSubmitted={() => {
+        onCompleteForm={() => {
           setFormSubmitted(true)
           setShowPromotionalBox(false)
         }}

@@ -10,7 +10,19 @@
     "build:speed": "vite build --mode production --minify false",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "analyze": "npx vite-bundle-analyzer dist",
+    "health": "node -e \"console.log('Health check endpoint not implemented - use browser console')\"",
+    "security:audit": "npm audit",
+    "security:fix": "npm audit fix",
+    "deps:update": "npm update",
+    "deps:check": "npx npm-check-updates",
+    "clean": "rm -rf dist node_modules/.vite",
+    "precommit": "npm run typecheck && npm run lint",
+    "ci": "npm run typecheck && npm run lint && npm run build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.4",

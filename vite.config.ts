@@ -8,9 +8,17 @@ export default defineConfig({
     strictPort: true,
     host: true,
     cors: true,
-    // Improve stability for development
+    // Speed optimizations for development
     hmr: {
-      overlay: false, // Disable error overlay for better user experience
+      overlay: false,
+    },
+    // Disable some checks for speed
+    fs: {
+      strict: false,
+    },
+    // Speed up hot module replacement
+    watch: {
+      ignored: ['**/node_modules/**', '**/.git/**'],
     },
   },
   preview: {
@@ -19,28 +27,42 @@ export default defineConfig({
     host: true,
   },
   build: {
-    // Optimize for production stability
-    target: 'es2015',
+    // Speed optimizations for build
+    target: 'esnext',
     minify: 'esbuild',
-    sourcemap: false, // Disable sourcemaps in production for security
+    sourcemap: false,
+    cssCodeSplit: true,
+    // Faster rollup configuration
     rollupOptions: {
       output: {
-        // Ensure consistent chunk naming for caching
-        chunkFileNames: 'assets/[name]-[hash].js',
-        entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          supabase: ['@supabase/supabase-js'],
+        },
       },
     },
-    // Increase chunk size warning limit for better debugging
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 2000,
   },
   // Environment variable validation
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '0.0.0'),
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
   },
-  // Optimize dependencies
+  // Optimize dependencies for speed
   optimizeDeps: {
-    include: ['react', 'react-dom', 'react-router-dom', '@supabase/supabase-js'],
+    include: [
+      'react',
+      'react-dom',
+      'react-router-dom',
+      '@supabase/supabase-js',
+      'framer-motion',
+      'lucide-react'
+    ],
+    exclude: ['@vite/client', '@vite/env'],
+  },
+  // Development speed optimizations
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
   },
 })

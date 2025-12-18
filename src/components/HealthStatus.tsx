@@ -199,9 +199,9 @@ export function HealthStatus({
 
 // Connection status indicator for use in navigation or header
 export function ConnectionStatus() {
-  const { isOnline, isOffline, isChecking } = useHealthCheck(10000)
+  const { health, loading } = useHealthCheck(10000)
 
-  if (isChecking) {
+  if (loading) {
     return (
       <div className="flex items-center space-x-1">
         <LoadingSpinner size="sm" />
@@ -209,6 +209,8 @@ export function ConnectionStatus() {
       </div>
     )
   }
+
+  const isOffline = health?.status === 'unhealthy'
 
   if (isOffline) {
     return (
@@ -251,11 +253,11 @@ export function HealthDashboard() {
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-600">إصدار التطبيق:</span>
-              <span className="font-mono">{typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '0.0.0'}</span>
+              <span className="font-mono">{__APP_VERSION__ || '0.0.0'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">وقت البناء:</span>
-              <span className="font-mono">{typeof __BUILD_TIME__ !== 'undefined' ? __BUILD_TIME__ : 'غير متوفر'}</span>
+              <span className="font-mono">{__BUILD_TIME__ || 'غير متوفر'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">البيئة:</span>

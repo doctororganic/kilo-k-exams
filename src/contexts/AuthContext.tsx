@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState, useCallback } fr
 import type { User } from '../lib/supabase'
 import { supabase } from '../lib/supabase'
 import { logger, authLogger } from '../utils/logger'
-import { handleAsyncError, AuthenticationError, NetworkError } from '../utils/errorHandler'
+import { handleAsyncError, AuthenticationError, NetworkError, DatabaseError } from '../utils/errorHandler'
 
 interface AuthContextType {
   user: User | null
@@ -51,14 +51,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [initializeGuestUser])
 
   const fetchUserProfile = useCallback(async (userId: string) => {
-    return handleAsyncError(
-      supabase
-        .from('users')
-        .select('*')
-        .eq('user_id', userId)
-        .single(),
-      'FETCH_USER_PROFILE'
-    )
+    const { data, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('user_id', userId)
+      .single()
+    
+    if (error) {
+      throw new DatabaseError(`Failed to fetch user profile: ${error.message}`, 'FETCH_USER_PROFILE')
+    }
+    
+    return { data, error }
   }, [])
 
   const signIn = useCallback(async (email: string, password: string) => {
@@ -134,10 +137,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           grade_level: grade,
         }
         
-        await handleAsyncError(
-          supabase.from('users').insert([userProfile]),
-          'CREATE_USER_PROFILE'
-        )
+        const { error: profileError } = await supabase
+          .from('users')
+          .insert([userProfile])
+        
+        if (profileError) {
+          throw new DatabaseError(`Failed to create user profile: ${profileError.message}`, 'CREATE_USER_PROFILE')
+        }
       }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'فشل في إنشاء الحساب'
@@ -156,10 +162,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       authLogger.info('Signing out user')
       
-      await handleAsyncError(
-        supabase.auth.signOut(),
-        'SIGN_OUT'
-      )
+      await supabase.auth.signOut()
       
       // Initialize new guest user
       initializeGuestUser()

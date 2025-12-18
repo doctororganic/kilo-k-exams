@@ -135,7 +135,7 @@ export function handleError(error: unknown, context?: string): AppError {
   }
 
   // Handle other types
-  const message = error instanceof String ? error : 'An unknown error occurred'
+  const message = String(error)
   return new ApplicationError(message, {
     context,
     isOperational: true,

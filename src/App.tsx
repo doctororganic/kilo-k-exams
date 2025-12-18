@@ -51,7 +51,7 @@ function App() {
   React.useEffect(() => {
     // Log app initialization
     logger.info('Application starting', 'APP_INIT', {
-      version: typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : '0.0.0',
+      version: __APP_VERSION__ || '0.0.0',
       environment: import.meta.env.DEV ? 'development' : 'production',
       userAgent: navigator.userAgent,
     })

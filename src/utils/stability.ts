@@ -64,10 +64,11 @@ export function setupPerformanceMonitoring() {
     // First Input Delay
     const fidObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
+        const fidEntry = entry as FIDPerformanceEntry
         import('./logger').then(({ logger }) => {
           logger.info('FID measured', 'PERFORMANCE', {
-            value: entry.processingStart - entry.startTime,
-            eventType: entry.name,
+            value: fidEntry.processingStart - fidEntry.startTime,
+            eventType: fidEntry.name,
           })
         })
       }
@@ -105,8 +106,8 @@ export function setupPerformanceMonitoring() {
 
 // Memory usage monitoring
 export function getMemoryUsage(): MemoryInfo | null {
-  if ('memory' in performance) {
-    return (performance as any).memory
+  if ('memory' in performance && (performance as any).memory) {
+    return (performance as any).memory as MemoryInfo
   }
   return null
 }
@@ -155,7 +156,7 @@ export function setupResourceMonitoring() {
           domContentLoaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
           loadComplete: perfData.loadEventEnd - perfData.loadEventStart,
           firstByte: perfData.responseStart - perfData.requestStart,
-          domInteractive: perfData.domInteractive - perfData.navigationStart,
+          domInteractive: perfData.domInteractive - (perfData as any).navigationStart,
         })
       })
     }, 0)

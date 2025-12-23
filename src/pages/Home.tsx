@@ -101,9 +101,42 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800">
       <main className="container mx-auto px-6 py-12">
-        <h1 className="text-4xl font-bold text-white text-center mb-12">
-          📚 مركز الامتحانات العلمية
-        </h1>
+        {/* Master Applications Access */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-white mb-4">
+            📚 مركز الامتحانات العلمية
+          </h1>
+          <p className="text-xl text-slate-300 mb-8">
+            اختر التطبيق المناسب لك
+          </p>
+
+          {/* Master Application Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+            <a
+              href="https://kuwait.master1.vip"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+            >
+              🇰🇼 كويت ماستر - Kuwait Master
+              <span className="block text-sm opacity-90">امتحانات الكويت</span>
+            </a>
+
+            <a
+              href="https://english.master1.vip"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+            >
+              🇬🇧 إنجليش ماستر - English Master
+              <span className="block text-sm opacity-90">امتحانات الإنجليزية</span>
+            </a>
+          </div>
+        </div>
+
+        <h2 className="text-3xl font-bold text-white text-center mb-8">
+          📖 الامتحانات المتاحة
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {exams.map((exam) => (

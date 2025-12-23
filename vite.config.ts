@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
   server: {
     port: 6345,
@@ -27,22 +27,58 @@ export default defineConfig({
     host: true,
   },
   build: {
-    // Speed optimizations for build
-    target: 'esnext',
-    minify: 'esbuild',
+    // Production optimizations for speed
+    target: mode === 'production' ? 'es2015' : 'esnext',
+    minify: mode === 'production' ? 'terser' : 'esbuild',
     sourcemap: false,
     cssCodeSplit: true,
-    // Faster rollup configuration
+    // Aggressive chunk splitting for better caching
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          supabase: ['@supabase/supabase-js'],
+        manualChunks: (id) => {
+          // Vendor chunk for React ecosystem
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor'
+            }
+            if (id.includes('react-router')) {
+              return 'router'
+            }
+            if (id.includes('@supabase')) {
+              return 'supabase'
+            }
+            if (id.includes('framer-motion')) {
+              return 'animation'
+            }
+            if (id.includes('lucide-react') || id.includes('@tabler/icons')) {
+              return 'icons'
+            }
+            // Other large libraries
+            return 'vendor'
+          }
+          // Application chunks
+          if (id.includes('/src/pages/')) {
+            return 'pages'
+          }
+          if (id.includes('/src/components/')) {
+            return 'components'
+          }
+          if (id.includes('/src/utils/') || id.includes('/src/lib/')) {
+            return 'utils'
+          }
         },
+        // Optimize chunk file names for caching
+        chunkFileNames: mode === 'production' ? 'assets/[name]-[hash].js' : 'assets/[name].js',
+        entryFileNames: mode === 'production' ? 'assets/[name]-[hash].js' : 'assets/[name].js',
+        assetFileNames: mode === 'production' ? 'assets/[name]-[hash].[ext]' : 'assets/[name].[ext]',
       },
     },
-    chunkSizeWarningLimit: 2000,
+    // Increase chunk size warning limit
+    chunkSizeWarningLimit: 1000,
+    // Enable CSS minification
+    cssMinify: mode === 'production',
+    // Report compressed size
+    reportCompressedSize: false,
   },
   // Environment variable validation
   define: {
@@ -64,5 +100,22 @@ export default defineConfig({
   // Development speed optimizations
   esbuild: {
     logOverride: { 'this-is-undefined-in-esm': 'silent' },
+    // Production minification options
+    ...(mode === 'production' && {
+      minify: true,
+      treeShaking: true,
+    }),
   },
-})
+  // Production-specific optimizations
+  ...(mode === 'production' && {
+    // Enable gzip compression
+    compress: true,
+    // Optimize CSS
+    css: {
+      devSourcemap: false,
+      modules: {
+        localsConvention: 'camelCaseOnly',
+      },
+    },
+  }),
+}))

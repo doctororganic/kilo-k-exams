@@ -25,8 +25,11 @@ function AppContent() {
     <Router>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white font-arabic">
         <Routes>
+          {/* Direct access to home without layout for cleaner URLs */}
+          <Route path="/" element={<Home />} />
+
+          {/* Layout routes for admin and user features */}
           <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
             <Route path="exam/:id" element={<Exam />} />
             <Route path="results/:examId" element={<Results />} />
             <Route path="analytics" element={<Analytics />} />
@@ -34,13 +37,21 @@ function AppContent() {
             <Route path="admin" element={<Admin />} />
             <Route path="admin/import" element={<Import />} />
           </Route>
-          
-          {/* Direct exam routes */}
+
+          {/* Direct exam routes - accessible without authentication */}
           <Route path="/exams/biology-12" element={<Biology12 />} />
           <Route path="/exams/chemistry-10" element={<Chemistry10 />} />
           <Route path="/exams/chemistry-11" element={<Chemistry11 />} />
           <Route path="/exams/physics-10" element={<Physics10 />} />
           <Route path="/exams/physics-11" element={<Physics11 />} />
+
+          {/* Kuwait Master routes - direct access */}
+          <Route path="/kuwait" element={<Home />} />
+          <Route path="/kuwait/exams/:id" element={<Exam />} />
+
+          {/* English Master routes - direct access */}
+          <Route path="/english" element={<Home />} />
+          <Route path="/english/exams/:id" element={<Exam />} />
         </Routes>
       </div>
     </Router>

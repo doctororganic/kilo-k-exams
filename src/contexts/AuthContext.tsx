@@ -46,8 +46,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
+    // Always initialize as guest user - no authentication required
     initializeGuestUser()
     setLoading(false)
+    setError(null)
   }, [initializeGuestUser])
 
   const fetchUserProfile = useCallback(async (userId: string) => {
